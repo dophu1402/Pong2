@@ -1,13 +1,16 @@
 #include "ball.h"
 
 
-
-ball::ball(sf::RenderWindow *window)
+Ball::Ball(float rad)
+{
+	this->m_ball.setRadius(rad);
+}
+Ball::Ball(sf::RenderWindow* window)
 {
 	this->m_window = window;
 	this->radius = 15;
-	sf::CircleShape ball(this->radius);
-	this->m_ball = ball;
+	sf::CircleShape Ball(this->radius);
+	this->m_ball = Ball;
 	this->m_ball.setFillColor(sf::Color::Yellow);
 	this->m_ball.setOrigin(this->m_ball.getRadius(), this->m_ball.getRadius());
 	this->m_ball.setPosition(600, 275);
@@ -20,9 +23,9 @@ ball::ball(sf::RenderWindow *window)
 
 }
 
-void ball::update(int left, int right)
+void Ball::update(int left, int right)
 {
-	
+
 	const sf::Time update_ms = sf::seconds(this->speed);
 	const auto pos = this->m_ball.getPosition();
 	const auto delta = update_ms.asSeconds() * this->velocity;
@@ -30,12 +33,12 @@ void ball::update(int left, int right)
 
 	if (new_pos.x - this->radius < left) { // left window edge
 		this->direction.x *= -1;
-		this->speed += this->speed*0.1;
+		this->speed += this->speed * 0.1;
 		new_pos.x = left + this->radius;
 	}
 	else if (new_pos.x + this->radius >= right) { // right window edge
 		this->direction.x *= -1;
-		this->speed += this->speed*0.1;
+		this->speed += this->speed * 0.1;
 		new_pos.x = right - this->radius;
 	}
 	else if (new_pos.y - this->radius < 25) { // top of window
@@ -48,16 +51,36 @@ void ball::update(int left, int right)
 	}
 	this->m_ball.setPosition(new_pos);
 }
-void ball::draw()
+void Ball::draw()
 {
 	this->m_window->draw(this->m_ball);
 }
 
-sf::Vector2f ball::getPosition()
+sf::Vector2f Ball::getPosition()
 {
 	return this->m_ball.getPosition();
 }
-float ball::getRadius()
+float Ball::getRadius()
 {
-	return this->radius;
+	return m_ball.getRadius();
+	//return this->radius;
+}
+
+void Ball::resetSpeed()
+{
+	this->speed = 0.03f;
+}
+
+
+void Ball::drawTo(sf::RenderWindow& window)
+{
+	window.draw(m_ball);
+}
+
+void Ball::move(sf::Vector2f distance) {
+	m_ball.move(distance);
+}
+
+void Ball::setPosition(sf::Vector2f pos) {
+	m_ball.setPosition(pos);
 }
