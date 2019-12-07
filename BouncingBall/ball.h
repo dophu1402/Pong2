@@ -6,7 +6,7 @@
 #include <random>
 #include <functional>
 #include <iostream>
-class ball
+class Ball
 {
 private:
 	sf::RenderWindow *m_window;
@@ -17,11 +17,17 @@ private:
 	float speed;
 
 public:
-	ball(sf::RenderWindow *window);
+	Ball(sf::RenderWindow *window);
 	void update(int, int);
 	void draw();
 	sf::Vector2f getPosition();
 	float getRadius();
+	void resetSpeed();
+
+	Ball(float rad);
+	void drawTo(sf::RenderWindow &window);
+	void move(sf::Vector2f distance);
+	void setPosition(sf::Vector2f pos);
 };
 
 #endif
