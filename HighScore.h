@@ -14,7 +14,7 @@ private:
 public:
 	HighScore();
 	~HighScore();
-	void saveHighScore(int, string file_name);
+	void saveHighScore(int);
 	void resize();
 	void writeHighScores(string file_name);
 	void loadHighScores(string file_name);

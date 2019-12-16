@@ -9,13 +9,11 @@ HighScore::~HighScore()
 	this->ScoreBoard.clear();
 }
 
-void HighScore::saveHighScore(int score, string file_name)
+void HighScore::saveHighScore(int score)
 {
-	loadHighScores(file_name);
 	ScoreBoard.push_back(to_string(score));
 	sort();
 	resize();
-	writeHighScores(file_name);
 }
 
 void HighScore::resize()
